@@ -22,6 +22,7 @@ interface MusicStore {
   fetchStats: () => Promise<void>;
   fetchSongs: () => Promise<void>;
   deleteSong: (songId: string) => Promise<void>;
+  deleteAlbum: (albumId: string) => Promise<void>;
 }
 
 export const useMusicStore = create<MusicStore>((set, get) => ({

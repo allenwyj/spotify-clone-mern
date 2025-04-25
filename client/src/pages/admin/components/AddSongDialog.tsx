@@ -262,6 +262,7 @@ const AddSongDialog = () => {
             <Button
               onClick={handleAddSong}
               disabled={isLoading}
+              className='bg-emerald-500 hover:bg-emerald-600 text-black'
             >
               {isLoading ? 'Uploading...' : 'Add Song'}
             </Button>

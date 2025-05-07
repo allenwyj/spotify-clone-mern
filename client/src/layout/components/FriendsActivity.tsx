@@ -6,11 +6,11 @@ import { HeadphonesIcon, Music, Users } from 'lucide-react';
 import { useEffect } from 'react';
 
 const FriendsActivity = () => {
-  const { users, fetchUsers } = useChatStore();
-  const { user } = useUser();
+  const { users, fetchUsers, onlineUsers, userActivities } = useChatStore();
+  const { user: clerkUser } = useUser();
   useEffect(() => {
-    if (user) fetchUsers();
-  }, [user, fetchUsers]);
+    if (clerkUser) fetchUsers();
+  }, [clerkUser, fetchUsers]);
 
   return (
     <div className='h-full bg-zinc-900 rounded-lg flex flex-col'>
@@ -21,12 +21,12 @@ const FriendsActivity = () => {
         </div>
       </div>
 
-      {!user && <LoginPrompt />}
+      {!clerkUser && <LoginPrompt />}
       <ScrollArea className='flex-1'>
         <div className='p-4 space-y-4'>
           {users.map((user) => {
-            const activity = {};
-            const isPlaying = false;
+            const activity = userActivities.get(user.clerkId);
+            const isPlaying = activity && activity !== 'Idle';
 
             return (
               <div

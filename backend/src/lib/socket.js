@@ -1,5 +1,5 @@
 import { Server } from 'socket.io';
-import { Message } from '../models/message.model';
+import { Message } from '../models/message.model.js';
 
 export const initialiseSocket = (server) => {
   const io = new Server(server, {
@@ -26,7 +26,7 @@ export const initialiseSocket = (server) => {
       io.emit('activities', Array.from(userActivities.entries()));
     });
 
-    socket.on('update_activity', (userId, activity) => {
+    socket.on('update_activity', ({ userId, activity }) => {
       userActivities.set(userId, activity);
       io.emit('activity_updated', { userId, activity });
     });
@@ -44,9 +44,8 @@ export const initialiseSocket = (server) => {
         // send to receiver if online
         const receiverSocketId = userSockets.get(receiverId);
         if (receiverSocketId) {
-          io.to(receiverSocketId).emit('receiver_message', message);
+          io.to(receiverSocketId).emit('receive_message', message);
         }
-
         socket.emit('message_sent', message);
       } catch (err) {
         console.error('Message error: ', err);

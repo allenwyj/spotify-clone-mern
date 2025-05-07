@@ -44,7 +44,7 @@ app.use(
   })
 );
 
-app.use('/api/user', userRoute);
+app.use('/api/users', userRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/admin', adminRoute);
 app.use('/api/songs', songRoute);

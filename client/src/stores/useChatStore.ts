@@ -4,7 +4,7 @@ import { Message, User } from '../types';
 import { io } from 'socket.io-client';
 
 interface ChatStore {
-  users: any[];
+  users: User[];
   isLoading: boolean;
   error: string | null;
   socket: any;
@@ -37,7 +37,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
   onlineUsers: new Set(),
   userActivities: new Map(),
   messages: [],
-  socket: null,
+  socket: socket,
   selectedUser: null,
 
   setSelectedUser: (user) => {
@@ -89,7 +89,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
         }));
       });
 
-      socket.on('send_message', (message: Message) => {
+      socket.on('message_sent', (message: Message) => {
         set((state) => ({
           messages: [...state.messages, message],
         }));

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
     "seed:songs": "node src/seeds/songs.js",
     "seed:albums": "node src/seeds/albums.js"
   },
@@ -20,9 +21,11 @@
     "express": "^4.21.1",
     "express-fileupload": "^1.5.1",
     "mongoose": "^8.8.2",
+    "node-cron": "^3.0.3",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "nodemon": "^3.1.7"
   }
 }
